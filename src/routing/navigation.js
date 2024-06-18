@@ -3,8 +3,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home/home';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Login from '../screens/Login/login';
+import Register from '../screens/Register/register';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeDetail from '../screens/HomDetail/homeDetail';
 import Cart from '../screens/Cart/cart';
 
@@ -36,10 +37,9 @@ const TabScreen = () => {
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="TabScreen"
-        screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Login" component={Login} />
+      <Stack.Navigator initialRouteName='Login'>
+        <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
+        <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="TabScreen" component={TabScreen} />
         <Stack.Screen name="HomeDetail" component={HomeDetail} />
       </Stack.Navigator>

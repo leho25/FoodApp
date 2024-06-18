@@ -1,13 +1,16 @@
 // Import the functions you need from the SDKs you need
-import {initializeApp} from 'firebase/app';
-import {
-  getAuth,
+import { initializeApp } from "firebase/app";
+import { 
+  initializeAuth,
+  getReactNativePersistence ,
+  getAuth, 
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendEmailVerification,
-  //read data from Firebase
-} from 'firebase/auth';
+  sendEmailVerification,  
+  //read data from Firebase    
+} from "firebase/auth"
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 //ref = reference to a "collection"
 import {
   getDatabase,
@@ -30,21 +33,25 @@ const firebaseConfig = {
     'https://foodapp-942df-default-rtdb.asia-southeast1.firebasedatabase.app',
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const firebaseDatabase = getDatabase();
+const app = initializeApp(firebaseConfig)
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+});
+//const auth = getAuth()
+const firebaseDatabase = getDatabase(app)
 const database = getFirestore();
 export {
-  auth,
-  firebaseDatabase,
-  database,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  firebaseSet,
-  firebaseDatabaseRef,
-  sendEmailVerification,
-  child,
-  get,
-  onValue, //reload when online DB changed
-  signInWithEmailAndPassword,
-};
+    auth,
+    getAuth,
+    firebaseDatabase,
+    database,
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    firebaseSet,
+    firebaseDatabaseRef,
+    sendEmailVerification,
+    child,
+    get,
+    onValue, //reload when online DB changed
+    signInWithEmailAndPassword,
+}

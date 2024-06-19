@@ -4,28 +4,6 @@ export default style = StyleSheet.create({
     main: {
         flex: 1,
       }, 
-    text: {
-        fontWeight: 'bold',
-        color:'red',
-        fontSize: 20,
-        alignSelf:"center",
-        marginTop:85
-    },
-    buttonLogin:{
-        backgroundColor:"red",
-        justifyContent:"center",
-        alignItems:"center",
-        height:50,
-        borderRadius:10,
-        marginHorizontal:20
-    },
-    textInput: {
-        height: 40,
-        borderColor: 'gray',
-        borderBottomWidth: 1,
-        marginHorizontal: 20,
-        marginVertical:1
-    },
     forgotPassword:{
         color:"blue",
         fontSize:15,
@@ -53,13 +31,11 @@ export default style = StyleSheet.create({
         color:'black',
         fontSize:15
     },
-    textLogin:{
-        color: 'white'
-    },
     textVadition:{
         color:'red',
         fontSize:15,
         marginLeft:20,
+        marginBottom:10
     }
 })
 

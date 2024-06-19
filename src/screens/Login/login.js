@@ -4,30 +4,17 @@ import {
 } from '../../component/firebase/firebaseConfig';
 import {React, useState, useMemo, useEffect} from 'react';
 import {View, Text, TouchableOpacity, TextInput, Keyboard} from 'react-native';
-import RadioGroup from 'react-native-radio-buttons-group';
 import {isValidEmail, isValidPassword} from '../../utils/validation';
 import {useNavigation} from '@react-navigation/native';
 import style from './style';
+import TextInputUI from '../../component/TextInputUI';
+import ButtonUI from '../../component/ButtonUI';
+import TitleUI from '../../component/TitleUI';
 
 const Login = () => {
   const navigation = useNavigation();
   const [keyboardIsShow, setkeyboardIsShow] = useState(false);
-  const [selectedId, setSelectedId] = useState();
-  const radioButtons = useMemo(
-    () => [
-      {
-        id: '1', // acts as primary key, should be unique and non-empty string
-        label: 'Quản trị viên',
-        value: 'option1',
-      },
-      {
-        id: '2',
-        label: 'Người dùng',
-        value: 'option2',
-      },
-    ],
-    [],
-  );
+
   //state for validating
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
@@ -51,23 +38,22 @@ const Login = () => {
   return (
     <View style={style.main}>
       <View style={style.viewLogin}>
-        <Text style={style.text}>Đăng Nhập</Text>
+        <TitleUI title="Đăng Nhập" />
       </View>
       <View style={style.viewInput}>
-        <TextInput
-          onChangeText={text => {
+        <TextInputUI
+          onPress={text => {
             setErrorEmail(
               isValidEmail(text) == true ? '' : 'Email not is corret format',
             );
             setEmail(text);
           }}
           value={email}
-          style={style.textInput}
-          placeholder="Email"
+          title="Email"
         />
         <Text style={style.textVadition}>{errorEmail}</Text>
-        <TextInput
-          onChangeText={text => {
+        <TextInputUI
+          onPress={text => {
             setErrorPassword(
               isValidPassword(text) == true
                 ? ''
@@ -77,35 +63,29 @@ const Login = () => {
           }}
           value={password}
           secureTextEntry={true}
-          style={style.textInput}
-          placeholder="Mật khẩu"
+          title="Mật khẩu"
         />
         <Text style={style.textVadition}>{errorPassword}</Text>
-        <View style={{alignItems: 'center', marginVertical: 20}}>
-          <RadioGroup
-            radioButtons={radioButtons}
-            onPress={setSelectedId}
-            selectedId={selectedId}
-            layout="row"
-          />
-        </View>
-        <TouchableOpacity
+        <ButtonUI
+          title="ĐĂNG NHẬP TÀI KHOẢN"
           disabled={isValidationOK() == false}
           onPress={() => {
             signInWithEmailAndPassword(auth, email, password)
               .then(userCredential => {
                 const user = userCredential.user;
-                navigation.navigate('TabScreen')
+                navigation.navigate('TabScreen');
               })
               .catch(error => {
                 alert(`cannot signin, error: ${error.message}`);
               });
+          }}
+        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('ForgotPassword');
           }}>
-          <View style={style.buttonLogin}>
-            <Text style={style.textLogin}>ĐĂNG NHẬP TÀI KHOẢN</Text>
-          </View>
+          <Text style={style.forgotPassword}>Quên mật khẩu</Text>
         </TouchableOpacity>
-        <Text style={style.forgotPassword}>Quên mật khẩu</Text>
       </View>
       {keyboardIsShow == false && (
         <View style={style.viewRegister}>

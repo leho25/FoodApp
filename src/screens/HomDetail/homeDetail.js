@@ -8,13 +8,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { colors } from '../../utils/color';
 const windowHeight = Dimensions.get('window').height;
 const HomeDetail = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       <View
         style={{
-          backgroundColor: '#fc5653',
+          backgroundColor: colors.header,
           height: 50,
           flexDirection: 'row',
           justifyContent: 'space-between',

@@ -6,34 +6,19 @@ import {
   firebaseDatabase,
   createUserWithEmailAndPassword,
   sendEmailVerification,
-  signInWithEmailAndPassword,
 } from '../../component/firebase/firebaseConfig';
-import {React, useState, useMemo, useEffect} from 'react';
+import {React, useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, TextInput, Keyboard} from 'react-native';
-import RadioGroup from 'react-native-radio-buttons-group';
 import {isValidEmail, isValidPassword} from '../../utils/validation';
 import {useNavigation} from '@react-navigation/native';
 import style from './style';
+import TextInputUI from '../../component/TextInputUI';
+import ButtonUI from '../../component/ButtonUI';
+import TitleUI from '../../component/TitleUI';
 
 const Register = () => {
   const navigation = useNavigation();
   const [keyboardIsShow, setkeyboardIsShow] = useState(false);
-  const [selectedId, setSelectedId] = useState();
-  const radioButtons = useMemo(
-    () => [
-      {
-        id: '1', // acts as primary key, should be unique and non-empty string
-        label: 'Quản trị viên',
-        value: 'option1',
-      },
-      {
-        id: '2',
-        label: 'Người dùng',
-        value: 'option2',
-      },
-    ],
-    [],
-  );
   //state for validating
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
@@ -55,24 +40,21 @@ const Register = () => {
   });
   return (
     <View style={style.main}>
-      <View style={style.viewLogin}>
-        <Text style={style.text}>Đăng Ký</Text>
-      </View>
+      <TitleUI title="Đăng Ký" />
       <View style={style.viewInput}>
-        <TextInput
-          onChangeText={text => {
+        <TextInputUI
+          onPress={text => {
             setErrorEmail(
               isValidEmail(text) == true ? '' : 'Email not is corret format',
             );
             setEmail(text);
           }}
           value={email}
-          style={style.textInput}
-          placeholder="Email"
+          title="Email"
         />
         <Text style={style.textVadition}>{errorEmail}</Text>
-        <TextInput
-          onChangeText={text => {
+        <TextInputUI
+          onPress={text => {
             setErrorPassword(
               isValidPassword(text) == true
                 ? ''
@@ -82,23 +64,15 @@ const Register = () => {
           }}
           value={password}
           secureTextEntry={true}
-          style={style.textInput}
-          placeholder="Mật khẩu"
+          title="Mật khẩu"
         />
         <Text style={style.textVadition}>{errorPassword}</Text>
-        <View style={{alignItems: 'center', marginVertical: 10}}>
-          <RadioGroup
-            radioButtons={radioButtons}
-            onPress={setSelectedId}
-            selectedId={selectedId}
-            layout="row"
-          />
-        </View>
-        <TouchableOpacity
+        <ButtonUI
+          title="ĐĂNG KÝ TÀI KHOẢN"
           disabled={isValidationOK() == false}
           onPress={() => {
             createUserWithEmailAndPassword(auth, email, password)
-              .then((userCredential) => {
+              .then(userCredential => {
                 const user = userCredential.user;
                 sendEmailVerification(user).then(() => {
                   console.log('Email verifieltion sent');
@@ -109,17 +83,15 @@ const Register = () => {
                     email: user.email,
                     emailVerified: user.emailVerified,
                     accessToken: user.accessToken,
-                  });
+                  },
+                );
                 navigation.navigate('Login');
               })
               .catch(error => {
                 alert(`cannot signin, error: ${error.message}`);
               });
-          }}>
-          <View style={style.buttonLogin}>
-            <Text style={style.textLogin}>ĐĂNG KÝ TÀI KHOẢN</Text>
-          </View>
-        </TouchableOpacity>
+          }}
+        />
       </View>
       {keyboardIsShow == false && (
         <View style={style.viewRegister}>

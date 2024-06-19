@@ -6,8 +6,12 @@ import Home from '../screens/Home/home';
 import Login from '../screens/Login/login';
 import Register from '../screens/Register/register';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import HomeDetail from '../screens/HomDetail/homeDetail';
 import Cart from '../screens/Cart/cart';
+import ForgotPassword from '../screens/ForgotPassword/forgotPassword';
+import ChangePassword from '../screens/ChangePassword/changePassword';
+import Account from '../screens/Account/account';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -23,7 +27,7 @@ const TabScreen = () => {
             iconName = focused ? 'cart' : 'cart-outline';
           }
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName} size={size} color={color} />
         },
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
@@ -31,6 +35,7 @@ const TabScreen = () => {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Cart" component={Cart} />
+      <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
 };
@@ -40,6 +45,8 @@ const Navigation = () => {
       <Stack.Navigator initialRouteName='Login'>
         <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
         <Stack.Screen name="TabScreen" component={TabScreen} />
         <Stack.Screen name="HomeDetail" component={HomeDetail} />
       </Stack.Navigator>

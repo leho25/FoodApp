@@ -6,11 +6,15 @@ import {useNavigation} from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { auth } from '../../component/firebase/firebaseConfig';
-import {StackActions} from '@react-navigation/native'
+import {
+  auth,
+  onAuthStateChanged,
+} from '../../component/firebase/firebaseConfig';
+import {StackActions} from '@react-navigation/native';
 
 const Account = () => {
   const navigation = useNavigation();
+  const userId = auth.currentUser.email;
   return (
     <View>
       <View style={style.main}>
@@ -18,12 +22,12 @@ const Account = () => {
           <View style={style.viewIcon}>
             <FontAwesome name="user-circle-o" size={50}></FontAwesome>
           </View>
-          <Text style={style.textUser}>phuoc@gmail.com</Text>
+          <Text style={style.textUser}>{userId}</Text>
         </View>
       </View>
       <TouchableOpacity
         onPress={() => {
-          alert('History');
+          navigation.navigate('OrderHistory');
         }}>
         <View style={style.viewLabel}>
           <View style={style.viewIcon}>
@@ -45,8 +49,8 @@ const Account = () => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-            auth.signOut()
-            navigation.dispatch(StackActions.popToTop())  
+          auth.signOut();
+          navigation.dispatch(StackActions.popToTop());
         }}>
         <View style={style.viewLogOut}>
           <View style={style.viewIcon}>

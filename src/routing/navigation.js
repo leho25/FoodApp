@@ -12,6 +12,8 @@ import Cart from '../screens/Cart/cart';
 import ForgotPassword from '../screens/ForgotPassword/forgotPassword';
 import ChangePassword from '../screens/ChangePassword/changePassword';
 import Account from '../screens/Account/account';
+import OrderHistory from '../screens/OrderHistory/orderHistory';
+import FeedBack from '../screens/FeedBack/feedBack';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -25,9 +27,19 @@ const TabScreen = () => {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Cart') {
             iconName = focused ? 'cart' : 'cart-outline';
+          } else if (route.name === 'FeedBack') {
+            iconName = focused ? 'file-text' : 'file-text-o';
+          } else if (route.name === 'Account') {
+            iconName = focused ? 'user-circle' : 'user-circle-o';
           }
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />
+          return route.name === 'Account' ? (
+            <FontAwesome name={iconName} size={size} color={color} />
+          ) : route.name === 'FeedBack' ? (
+            <FontAwesome name={iconName} size={size} color={color} />
+          ) : (
+            <Ionicons name={iconName} size={size} color={color} />
+          );
         },
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
@@ -35,6 +47,7 @@ const TabScreen = () => {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Cart" component={Cart} />
+      <Tab.Screen name="FeedBack" component={FeedBack} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
@@ -42,11 +55,16 @@ const TabScreen = () => {
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen name="OrderHistory" component={OrderHistory} />
         <Stack.Screen name="TabScreen" component={TabScreen} />
         <Stack.Screen name="HomeDetail" component={HomeDetail} />
       </Stack.Navigator>

@@ -2,9 +2,8 @@ import {
   auth,
   signInWithEmailAndPassword,
 } from '../../component/firebase/firebaseConfig';
-import {React, useState, useMemo, useEffect} from 'react';
+import {React, useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, TextInput, Keyboard} from 'react-native';
-import RadioGroup from 'react-native-radio-buttons-group';
 import {isValidEmail, isValidPassword} from '../../utils/validation';
 import {useNavigation} from '@react-navigation/native';
 import style from './style';
@@ -13,21 +12,6 @@ const Login = () => {
   const navigation = useNavigation();
   const [keyboardIsShow, setkeyboardIsShow] = useState(false);
   const [selectedId, setSelectedId] = useState();
-  const radioButtons = useMemo(
-    () => [
-      {
-        id: '1', // acts as primary key, should be unique and non-empty string
-        label: 'Quản trị viên',
-        value: 'option1',
-      },
-      {
-        id: '2',
-        label: 'Người dùng',
-        value: 'option2',
-      },
-    ],
-    [],
-  );
   //state for validating
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
@@ -81,14 +65,6 @@ const Login = () => {
           placeholder="Mật khẩu"
         />
         <Text style={style.textVadition}>{errorPassword}</Text>
-        <View style={{alignItems: 'center', marginVertical: 20}}>
-          <RadioGroup
-            radioButtons={radioButtons}
-            onPress={setSelectedId}
-            selectedId={selectedId}
-            layout="row"
-          />
-        </View>
         <TouchableOpacity
           disabled={isValidationOK() == false}
           onPress={() => {

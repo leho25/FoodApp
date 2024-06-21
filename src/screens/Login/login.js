@@ -5,7 +5,7 @@ import {
   firebaseSet,
   firebaseDatabase,
 } from '../../component/firebase/firebaseConfig';
-import {React, useState, useMemo, useEffect} from 'react';
+import {React, useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, TextInput, Keyboard} from 'react-native';
 import {isValidEmail, isValidPassword} from '../../utils/validation';
 import {useNavigation} from '@react-navigation/native';

@@ -1,33 +1,69 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Text,
   View,
   ScrollView,
-  Dimensions,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { colors } from '../../utils/color';
-const windowHeight = Dimensions.get('window').height;
+import {style} from './styles';
+
 const HomeDetail = ({navigation}) => {
+  const [openModal, setOpenModal] = useState(false);
+  const renderModalAddToCart = () => {
+    return (
+      <Modal visible={openModal} animationType="slide" transparent={true}>
+        <View style={style.containerModal}>
+          <View style={style.containerCardAddToCart}>
+            <View style={style.innerContainerCardAddToCart}>
+              <View style={style.containerImageModal}>
+                <Image
+                  source={{
+                    uri: 'https://www.mordeo.org/files/uploads/2016/10/Cute-Angry-Birds-Mobile-Wallpaper.jpg',
+                  }}
+                  style={style.imageModal}
+                />
+              </View>
+              <View style={style.containerInforModal}>
+                <Text style={style.textNameModal}>Name</Text>
+                <Text style={style.textPriceModal}>Price</Text>
+                <View style={style.containerUpDownQuality}>
+                  <TouchableOpacity style={style.btnUpDownQuality}>
+                    <Text style={style.textUpAndDownQuality}>-</Text>
+                  </TouchableOpacity>
+                  <View style={style.btnUpDownQuality}>
+                    <Text style={style.textUpAndDownQuality}>0</Text>
+                  </View>
+                  <TouchableOpacity style={style.btnUpDownQuality}>
+                    <Text style={style.textUpAndDownQuality}>+</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+            <View style={style.containerButton}>
+              <TouchableOpacity
+                onPress={() => setOpenModal(false)}
+                style={style.btnCancelModal}>
+                <Text style={style.textButton}>Hủy bỏ</Text>
+              </TouchableOpacity>
+              <View style={style.btnAddToCartModal}>
+                <Text style={style.textButton}>Thêm vào giỏ hàng</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
   return (
-    <View style={{flex: 1}}>
-      <View
-        style={{
-          backgroundColor: colors.header,
-          height: 50,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: 10,
-        }}>
+    <View style={style.container}>
+      <View style={style.containerHeader}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={'arrow-back'} size={30} color={'white'} />
         </TouchableOpacity>
-        <Text style={{fontSize: 26, fontWeight: '500', color: 'white'}}>
-          Chi tiết món ăn
-        </Text>
+        <Text style={style.textHeader}>Chi tiết món ăn</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
           <Ionicons name={'cart-outline'} size={30} color={'white'} />
         </TouchableOpacity>
@@ -38,36 +74,17 @@ const HomeDetail = ({navigation}) => {
             source={{
               uri: 'https://www.mordeo.org/files/uploads/2016/10/Cute-Angry-Birds-Mobile-Wallpaper.jpg',
             }}
-            style={{height: 200}}
+            style={style.imageItem}
           />
-          <View style={{marginHorizontal: 20, marginTop: 10}}>
-            <Text style={{fontSize: 20, fontWeight: '500', color: 'black'}}>
-              Name
-            </Text>
-            <Text style={{fontSize: 20, fontWeight: '500', color: 'red'}}>
-              Price
-            </Text>
+          <View style={style.containerInforItem}>
+            <Text style={style.textName}>Name</Text>
+            <Text style={style.textPrice}>Price</Text>
           </View>
-          <View
-            style={{
-              height: 2,
-              borderWidth: 1,
-              marginTop: 10,
-              marginHorizontal: 20,
-              borderColor: '#fc5653',
-            }}></View>
+          <View style={style.line}></View>
         </View>
-        <View style={{marginHorizontal: 20, marginTop: 10}}>
-          <Text style={{fontSize: 16, fontWeight: '500', color: 'red'}}>
-            Mô ta
-          </Text>
-          <Text
-            style={{
-              fontSize: 14,
-              fontWeight: '500',
-              color: 'black',
-              marginTop: 5,
-            }}>
+        <View style={style.containerDescription}>
+          <Text style={style.textLabel}>Mô ta</Text>
+          <Text style={style.textDescription}>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
@@ -79,88 +96,46 @@ const HomeDetail = ({navigation}) => {
             PageMaker including versions of Lorem Ipsum.
           </Text>
         </View>
-        <View
-          style={{
-            marginTop: 10,
-            width: '100%',
-            windowHeight: '100%',
-            paddingHorizontal: 20,
-          }}>
+        <View style={style.containerImageOther}>
           <View>
-            <Text style={{fontSize: 16, fontWeight: '500', color: 'red'}}>
-              Một số hình ảnh khác
-            </Text>
+            <Text style={style.textLabel}>Một số hình ảnh khác</Text>
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-            }}>
-            <View
-              style={{
-                width: '48%',
-                height: 150,
-                backgroundColor: 'white',
-                marginTop: 10,
-              }}>
+          <View style={style.innerContainerImageOther}>
+            <View style={style.viewImageOther}>
               <Image
                 source={{
                   uri: 'https://www.mordeo.org/files/uploads/2016/10/Cute-Angry-Birds-Mobile-Wallpaper.jpg',
                 }}
-                style={{width: '100%', height: '100%', borderRadius: 10}}
+                style={style.imageOther}
               />
             </View>
-            <View
-              style={{
-                width: '48%',
-                height: 150,
-                backgroundColor: 'white',
-                marginTop: 10,
-              }}>
+            <View style={style.viewImageOther}>
               <Image
                 source={{
                   uri: 'https://www.mordeo.org/files/uploads/2016/10/Cute-Angry-Birds-Mobile-Wallpaper.jpg',
                 }}
-                style={{width: '100%', height: '100%', borderRadius: 10}}
+                style={style.imageOther}
               />
             </View>
-            <View
-              style={{
-                width: '48%',
-                height: 150,
-                backgroundColor: 'white',
-                marginTop: 10,
-              }}>
+            <View style={style.viewImageOther}>
               <Image
                 source={{
                   uri: 'https://www.mordeo.org/files/uploads/2016/10/Cute-Angry-Birds-Mobile-Wallpaper.jpg',
                 }}
-                style={{width: '100%', height: '100%', borderRadius: 10}}
+                style={style.imageOther}
               />
             </View>
           </View>
         </View>
-        <View
-          style={{
-            paddingHorizontal: 20,
-            marginVertical: 10,
-            width: '100%',
-            height: 50,
-          }}>
+        <View style={style.containerAddToCart}>
           <TouchableOpacity
-            style={{
-              backgroundColor: 'green',
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 8,
-            }}>
-            <Text style={{fontSize: 26, color: 'white', fontWeight: '500'}}>
-              Thêm vào giỏ hàng
-            </Text>
+            style={style.btnAddToCart}
+            onPress={() => setOpenModal(true)}>
+            <Text style={style.textBtnAddToCart}>Thêm vào giỏ hàng</Text>
           </TouchableOpacity>
         </View>
+
+        {renderModalAddToCart()}
       </ScrollView>
     </View>
   );

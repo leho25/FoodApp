@@ -1,8 +1,62 @@
-import React from 'react';
-import {Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Image,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  TextInput,
+} from 'react-native';
 import {style} from './styles';
 
 const Cart = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const renderModalOrder = () => {
+    return (
+      <Modal visible={openModal} animationType="slide" transparent={true}>
+        <View style={style.containerModal}>
+          <View style={style.containerFormOrderModal}>
+            <View style={style.containerHeaderModal}>
+              <Text style={style.textHeaderModal}>Chi tiết đơn hàng</Text>
+              <Text style={style.textPriceModal}>Giá</Text>
+            </View>
+            <Text style={style.textInforModal}>
+              - Bò cuộn phô mai (213 000 VNĐ) - Số lượng: 1
+            </Text>
+            <View style={style.containerFormInputModal}>
+              <Text style={style.textLabelInputModal}>
+                Phương thức thanh toán
+              </Text>
+              <TextInput style={style.inputModal} />
+            </View>
+            <View style={style.containerFormInputModal}>
+              <Text style={style.textLabelInputModal}>Họ và Tên</Text>
+              <TextInput style={style.inputModal} />
+            </View>
+            <View style={style.containerFormInputModal}>
+              <Text style={style.textLabelInputModal}>Số điện thoại</Text>
+              <TextInput style={style.inputModal} />
+            </View>
+            <View style={style.containerFormInputModal}>
+              <Text style={style.textLabelInputModal}>Địa chỉ giao hàng</Text>
+              <TextInput style={style.inputModal} />
+            </View>
+            <View style={style.containerButton}>
+              <TouchableOpacity
+                onPress={() => setOpenModal(false)}
+                style={style.btnCancelModal}>
+                <Text style={style.textButton}>Hủy bỏ</Text>
+              </TouchableOpacity>
+              <View style={style.btnAddToCartModal}>
+                <Text style={style.textButton}>Đặt hàng</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
   return (
     <View style={style.container}>
       <View style={style.containerHeader}>
@@ -49,11 +103,14 @@ const Cart = () => {
           <Text style={style.textPrice}>Price</Text>
         </View>
         <View style={style.containerOrder}>
-          <TouchableOpacity style={style.btnOrder}>
+          <TouchableOpacity
+            style={style.btnOrder}
+            onPress={() => setOpenModal(true)}>
             <Text style={style.textOrder}>Đặt hàng</Text>
           </TouchableOpacity>
         </View>
       </View>
+      {renderModalOrder()}
     </View>
   );
 };

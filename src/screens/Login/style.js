@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../utils/color";
 
 export default style = StyleSheet.create({
     main: {
         flex: 1,
+        backgroundColor:colors.background
       }, 
     forgotPassword:{
         color:"blue",
@@ -12,7 +14,7 @@ export default style = StyleSheet.create({
         fontWeight:"bold"
     },
     viewInput:{
-        flex: 0.6
+        flex: 0.6,
     },
     viewLogin:{
         flex: 0.3
@@ -36,6 +38,24 @@ export default style = StyleSheet.create({
         fontSize:15,
         marginLeft:20,
         marginBottom:10
-    }
+    },
+    container: { 
+        flexDirection: 'row', 
+        height: 40,
+        borderColor: 'gray',
+        borderBottomWidth: 1,
+        marginHorizontal: 20,
+        marginVertical:1,
+        fontSize:18,
+        alignItems: 'center', 
+        justifyContent: 'center',
+    }, 
+    textInput: { 
+        flex: 1, 
+        color: '#333', 
+        paddingVertical: 10, 
+        paddingRight: 10, 
+        fontSize: 18, 
+    }, 
 })
 

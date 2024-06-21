@@ -8,7 +8,6 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   auth,
-  onAuthStateChanged,
 } from '../../component/firebase/firebaseConfig';
 import {StackActions} from '@react-navigation/native';
 
@@ -16,11 +15,14 @@ const Account = () => {
   const navigation = useNavigation();
   const userId = auth.currentUser.email;
   return (
-    <View>
+    <View style={style.container}>
       <View style={style.main}>
         <View style={style.viewUser}>
           <View style={style.viewIcon}>
-            <FontAwesome name="user-circle-o" size={50}></FontAwesome>
+            <FontAwesome
+              name="user-circle-o"
+              size={50}
+              color="rgb(236,237,238)"></FontAwesome>
           </View>
           <Text style={style.textUser}>{userId}</Text>
         </View>

@@ -1,6 +1,9 @@
 import {
   auth,
   signInWithEmailAndPassword,
+  firebaseDatabaseRef,
+  firebaseSet,
+  firebaseDatabase,
 } from '../../component/firebase/firebaseConfig';
 import {React, useState, useMemo, useEffect} from 'react';
 import {View, Text, TouchableOpacity, TextInput, Keyboard} from 'react-native';
@@ -10,6 +13,7 @@ import style from './style';
 import TextInputUI from '../../component/TextInputUI';
 import ButtonUI from '../../component/ButtonUI';
 import TitleUI from '../../component/TitleUI';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -21,6 +25,10 @@ const Login = () => {
   //state for store email, password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   //state check data is validate
   const isValidationOK = () =>
     email.length > 0 &&
@@ -52,19 +60,28 @@ const Login = () => {
           title="Email"
         />
         <Text style={style.textVadition}>{errorEmail}</Text>
-        <TextInputUI
-          onPress={text => {
-            setErrorPassword(
-              isValidPassword(text) == true
-                ? ''
-                : 'Password must be at least 6 characters',
-            );
-            setPassword(text);
-          }}
-          value={password}
-          secureTextEntry={true}
-          title="Mật khẩu"
-        />
+        <View style={style.container}>
+          <TextInput
+            onChangeText={text => {
+              setErrorPassword(
+                isValidPassword(text) == true
+                  ? ''
+                  : 'Password must be at least 6 characters',
+              );
+              setPassword(text);
+            }}
+            style={style.textInput}
+            value={password}
+            secureTextEntry={!showPassword}
+            placeholder="Mật khẩu"
+          />
+          <MaterialCommunityIcons
+            name={showPassword ? 'eye-off' : 'eye'}
+            size={24}
+            color="#aaa"
+            onPress={toggleShowPassword}
+          />
+        </View>
         <Text style={style.textVadition}>{errorPassword}</Text>
         <ButtonUI
           title="ĐĂNG NHẬP TÀI KHOẢN"
@@ -73,6 +90,14 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email, password)
               .then(userCredential => {
                 const user = userCredential.user;
+                firebaseSet(
+                  firebaseDatabaseRef(firebaseDatabase, `users/${user.uid}`),
+                  {
+                    email: user.email,
+                    emailVerified: user.emailVerified,
+                    accessToken: user.accessToken,
+                  },
+                );
                 navigation.navigate('TabScreen');
               })
               .catch(error => {

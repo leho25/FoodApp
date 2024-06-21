@@ -39,6 +39,7 @@ const FeedBack = () => {
           onChangeText(text);
         }}
         value={value}
+        
       />
       <TouchableOpacity
         onPress={() => {

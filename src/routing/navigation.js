@@ -12,6 +12,8 @@ import ChangePassword from '../screens/ChangePassword/changePassword';
 import Account from '../screens/Account/account';
 import OrderHistory from '../screens/OrderHistory/orderHistory';
 import FeedBack from '../screens/FeedBack/feedBack';
+import Login from '../screens/Login/login';
+import Register from '../screens/Register/register';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -53,7 +55,7 @@ const TabScreen = () => {
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="TabScreen">
         <Stack.Screen
           name="Login"
           component={Login}

@@ -9,6 +9,7 @@ import {
   TextInput,
 } from 'react-native';
 import {style} from './styles';
+import HeaderUI from '../../component/Header';
 
 const Cart = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -59,9 +60,7 @@ const Cart = () => {
   };
   return (
     <View style={style.container}>
-      <View style={style.containerHeader}>
-        <Text style={style.textHeader}>Giỏ hàng</Text>
-      </View>
+      <HeaderUI title={'Giỏ hàng'} />
       <ScrollView>
         <View style={style.containerCart}>
           <View style={style.innerContainerCart}>

@@ -1,6 +1,20 @@
 import {StyleSheet} from 'react-native';
-
+import { colors } from '../../utils/color';
 export default style = StyleSheet.create({
+  container: {
+    backgroundColor:colors.background,
+    marginBottom:10,
+    shadowColor: "#000",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 1.00,
+    
+    elevation: 1,
+  },
   main: {
     flexDirection: 'row',
     borderBottomWidth: 1,
@@ -27,10 +41,21 @@ export default style = StyleSheet.create({
   viewTotal: {
     margin:20
   },
+  viewPayMent:{
+    flexDirection: 'row'
+  },
   textTotal: {
     fontSize: 18,
     marginBottom: 10,
     color: 'red',
     fontWeight: 'bold',
+    marginRight:20
+  },
+  textPayMent: {
+    fontSize: 15,
+    marginBottom: 10,
+    color: 'black',
+    fontWeight:"bold",
+    marginLeft:20
   },
 });

@@ -10,6 +10,7 @@ import AdminFeedBack from '../screens/Admin/AdminFeedBack/adminFeedBack';
 import AdminAccount from '../screens/Admin/AdminAccount/adminAccount';
 import AdminOrder from '../screens/Admin/AdminOrder/adminOrder';
 import AdminHome from '../screens/Admin/AdminHome/adminHome';
+import Revenue from '../screens/Admin/Revenue/revenue';
 import OrderHistory from '../screens/OrderHistory/orderHistory';
 import Login from '../screens/Login/login';
 import Register from '../screens/Register/register';
@@ -22,13 +23,13 @@ const TabScreen = () => {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
-          
+
           if (route.name === 'AdminHome') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'AdminFeedBack') {
             iconName = focused ? 'file-text' : 'file-text-o';
           } else if (route.name === 'AdminOrder') {
-            iconName = focused ? 'cart' : 'cart-outline';
+            iconName = focused ? 'history' : 'history';
           } else if (route.name === 'AdminAccount') {
             iconName = focused ? 'user-circle' : 'user-circle-o';
           }
@@ -36,6 +37,8 @@ const TabScreen = () => {
           return route.name === 'AdminAccount' ? (
             <FontAwesome name={iconName} size={size} color={color} />
           ) : route.name === 'AdminFeedBack' ? (
+            <FontAwesome name={iconName} size={size} color={color} />
+          ) : route.name === 'AdminOrder' ? (
             <FontAwesome name={iconName} size={size} color={color} />
           ) : (
             <Ionicons name={iconName} size={size} color={color} />
@@ -55,7 +58,7 @@ const TabScreen = () => {
 const AdminNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TabScreen">
+      <Stack.Navigator initialRouteName="Revenue">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -66,6 +69,7 @@ const AdminNavigation = () => {
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
         <Stack.Screen name="OrderHistory" component={OrderHistory} />
         <Stack.Screen name="TabScreen" component={TabScreen} />
+        <Stack.Screen name="Revenue" component={Revenue} />
       </Stack.Navigator>
     </NavigationContainer>
   );

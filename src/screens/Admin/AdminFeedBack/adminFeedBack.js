@@ -49,15 +49,10 @@ const AdminFeedBack = props => {
   ]);
   return (
     <View style={style.main}>
-      {/* <ScrollView>
-        {feedbacks.map(eachFeedBack => (
-          <FeedBackItem feedback={eachFeedBack} key={eachFeedBack.name} />
-        ))}
-      </ScrollView> */}
       <FlatList
         data={feedbacks}
         renderItem={({item}) => <FeedBackItem feedback = {item}  key={item.name}/>}
-        keyExtractor={eachFeedBack => eachFeedBack.name}
+        keyExtractor={eachKey => eachKey.name}
       />
     </View>
   );

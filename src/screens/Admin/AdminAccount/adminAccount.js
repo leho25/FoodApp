@@ -26,7 +26,7 @@ const AdminAccount = () => {
       </View>
       <TouchableOpacity
         onPress={() => {
-          alert('repot')
+          navigation.navigate('Revenue');
         }}>
         <View style={style.viewLabel}>
           <View style={style.viewIcon}>

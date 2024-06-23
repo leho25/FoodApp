@@ -1,35 +1,57 @@
-import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
+import {Text, FlatList, View} from 'react-native';
+import OrderHistoryItem from './orderHistoryItem';
 import style from './style';
 
-const OrderHistory = () => {
+const OrderHistory = props => {
+  const[ok,setOK] = useState(true)
+  const [orders, setOrder] = useState([
+    {
+      id: '151151555651651',
+      name: 'Lê Đức Phước',
+      phone: '065985484',
+      adress: 'Bình Tân, Ho Chi Minh',
+      menu: `Bò sốt tiêu đen(160 000 VNĐ) -Số lượng: 1
+       -Gà rang muối(76 000 VNĐ) -Số lượng: 2
+       - Cá mú hấp Hồng Koong(195 000 VNĐ) -Số lượng: 3
+       - Sườn xào chua(195 000 VNĐ) -Số lượng: 3`,
+      date: '28-06-2024 05:40 PM',
+      total: '952 000 VNĐ',
+      payment: 'Tiền mặt',
+    },
+    {
+      id: '28479823451',
+      name: 'Phan Duy Long',
+      phone: '0877652148',
+      adress: 'Bình Tân, Ho Chi Minh',
+      menu: `Bò sốt tiêu đen(160 000 VNĐ) -Số lượng: 1
+       -Gà rang muối(76 000 VNĐ) -Số lượng: 2
+       - Cá mú hấp Hồng Koong(195 000 VNĐ) -Số lượng: 3
+       - Sườn xào chua(195 000 VNĐ) -Số lượng: 1`,
+      date: '28-06-2024 05:40 PM',
+      total: '876 000 VNĐ',
+      payment: 'Chuyển khoản',
+    },
+    {
+      id: '258879823451',
+      name: 'Thanh Hana',
+      phone: '0325652148',
+      adress: 'Bình Tân, Ho Chi Minh',
+      menu: `Bò sốt tiêu đen(160 000 VNĐ) -Số lượng: 1
+       -Gà rang muối(76 000 VNĐ) -Số lượng: 2
+       - Cá mú hấp Hồng Koong(195 000 VNĐ) -Số lượng: 3`,
+      date: '28-06-2024 05:40 PM',
+      total: '266 000 VNĐ',
+      payment: 'Tiền mặt',
+    },
+  ]);
   return (
-    <View style={{backgroundColor:"white"}}>
-    <View style={style.main}>
-      <View style={style.title}>
-        <Text style={style.text}>Mã đơn hàng: </Text>
-        <Text style={style.text}>Họ tên: </Text>
-        <Text style={style.text}>Số điện thoại: </Text>
-        <Text style={style.text}>Địa chỉ nhận: </Text>
-        <Text style={style.text}>Thực đơn:</Text>
-        <Text style={style.text}>Ngày đặt hàng: </Text>
-      </View>
-      <View style={style.info}>
-        <Text style={style.textInfo}>0011165656</Text>
-        <Text style={style.textInfo}>Lê Đức Phước</Text>
-        <Text style={style.textInfo}>065156565</Text>
-        <Text style={style.textInfo}>Bình Tân, Hồ Chí Minh</Text>
-        <Text style={style.textInfo}>
-          -Bò sốt tiêu đen(160 000 VNĐ) - Số lượng:1 Ga rang muoi(76 000VNĐ) -Số
-          lượng: 2 Bò cuộn phô mai(99 000VNĐ) -Số lượng:3
-        </Text>
-        <Text style={style.textInfo}>28-06-2024, 05:40 PM</Text>
-      </View>
-    </View>
-    <View style={style.viewTotal}>
-        <Text style={style.textTotal}>Tổng Tiền:</Text>
-        <Text style={style.textInfo}>Thanh toán: Tien mat</Text>
-    </View>
+    <View>
+      <FlatList
+        data={orders}
+        renderItem={({item}) => <OrderHistoryItem order={item} key={item.id} />}
+        keyExtractor={eachKey => eachKey.id}
+      />
     </View>
   );
 };

@@ -55,7 +55,7 @@ const TabScreen = () => {
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="TabScreen">
         <Stack.Screen
           name="Login"
           component={Login}

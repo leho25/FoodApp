@@ -7,7 +7,7 @@ import {
 
 const FeedBack = () => {
   const [value, onChangeText] = useState('');
-  const userId = auth.currentUser.email;
+  // const userId = auth.currentUser.email;
   return (
     <View style={style.main}>
       <Text style={style.text}>Họ và tên (*)</Text>

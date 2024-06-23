@@ -2,6 +2,8 @@ import {React, useState} from 'react';
 import {View, Text, ScrollView, FlatList} from 'react-native';
 import style from './style';
 import FeedBackItem from './feedBackItem';
+import HeaderUI from '../../../component/Header';
+
 
 const AdminFeedBack = props => {
   const [feedbacks, setFeedback] = useState([
@@ -49,6 +51,7 @@ const AdminFeedBack = props => {
   ]);
   return (
     <View style={style.main}>
+      <HeaderUI title="Phản hồi"/>
       <FlatList
         data={feedbacks}
         renderItem={({item}) => <FeedBackItem feedback = {item}  key={item.name}/>}

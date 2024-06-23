@@ -7,10 +7,10 @@ export default style = StyleSheet.create({
         backgroundColor:colors.background
       }, 
     viewInput:{
-        flex: 0.9
+        flex: 0.9,
     },
     viewRegister:{
-        flex: 0.1,
+        flex:0.1,
         flexDirection:"row",
         justifyContent:"center",
         alignItems:"center",
@@ -28,6 +28,13 @@ export default style = StyleSheet.create({
         fontSize:15,
         marginLeft:20,
         marginBottom:10
-    }
+    },
+    containerHeader: {
+        height: 50,
+        paddingHorizontal: 10,
+        justifyContent:"center",
+        marginBottom:90
+      },
+      iconArrowBack: {position: 'absolute', left: 10},
 })
 

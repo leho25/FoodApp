@@ -3,9 +3,10 @@ import style from './style';
 import TextInputUI from '../../component/TextInputUI';
 import ButtonUI from '../../component/ButtonUI';
 import TitleUI from '../../component/TitleUI';
-import {View} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const ChangePassword = () => {
+const ChangePassword = ({navigation}) => {
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -15,8 +16,15 @@ const ChangePassword = () => {
     confirmNewPassword.length > 0;
   return (
     <View style={style.main}>
-      <TitleUI title="Đổi mật khẩu" />
+      <View style={style.containerHeader}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={style.iconArrowBack}>
+          <Ionicons name={'arrow-back'} size={30} color={'black'} />
+        </TouchableOpacity>
+      </View>
       <View style={style.viewInput}>
+      <TitleUI title="Đổi mật khẩu" />
         <TextInputUI
           onPress={text => {
             setPassword(text);
@@ -38,14 +46,16 @@ const ChangePassword = () => {
           value={confirmNewPassword}
           title="Xác nhận mật khẩu mới"
         />
+        <View style={style.button}>
+        <ButtonUI
+          title="ĐỔI MẬT KHẨU"
+          disabled={isValidationOK() == false}
+          onPress={() => {
+            alert('Change password');
+          }}
+        />
+        </View>
       </View>
-      <ButtonUI
-        title="ĐỔI MẬT KHẨU"
-        disabled={isValidationOK() == false}
-        onPress={() => {
-          alert('Change password');
-        }}
-      />
     </View>
   );
 };

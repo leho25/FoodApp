@@ -6,6 +6,5 @@ export default style = StyleSheet.create({
         color:'red',
         fontSize: 20,
         alignSelf:"center",
-        marginTop:85
     },
 })

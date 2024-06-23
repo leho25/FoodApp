@@ -3,7 +3,7 @@ import Navigation from './routing/navigation';
 import AdminNavigation from './routing/adminNavigation';
 const Index = () => {
   return (
-   <AdminNavigation />
+   <Navigation />
   );
 };
 export default Index

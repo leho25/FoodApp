@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {Text, FlatList, View} from 'react-native';
+import {Text, FlatList, View,TouchableOpacity} from 'react-native';
 import OrderHistoryItem from './orderHistoryItem';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import style from './style';
+import HeaderUI from '../../component/Header';
 
-const OrderHistory = props => {
+const OrderHistory = ({navigation}) => {
   const[ok,setOK] = useState(true)
   const [orders, setOrder] = useState([
     {
@@ -47,6 +49,14 @@ const OrderHistory = props => {
   ]);
   return (
     <View>
+       <View style={style.containerHeader}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={style.iconArrowBack}>
+          <Ionicons name={'arrow-back'} size={30} color={'white'} />
+        </TouchableOpacity>
+        <Text style={style.textHeader}>Lịch sử đặt hàng</Text>
+      </View>
       <FlatList
         data={orders}
         renderItem={({item}) => <OrderHistoryItem order={item} key={item.id} />}

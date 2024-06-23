@@ -5,13 +5,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Login from '../screens/Login/login';
 import Register from '../screens/Register/register';
-import AdminHome from '../screens/Admin/AdminHome/adminHome';
 import AddFood from '../screens/Admin/AddFood/addFood';
 import AdminFeedBack from '../screens/Admin/AdminFeedBack/adminFeedBack';
 import AdminAccount from '../screens/Admin/AdminAccount/adminAccount';
 import AdminOrder from '../screens/Admin/AdminOrder/adminOrder';
 import Revenue from '../screens/Admin/Revenue/revenue';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AdminHome from '../screens/Admin/AdminHome/adminHome';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -21,7 +21,7 @@ const TabScreen = () => {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
-          if (route.name === 'AdminHome') {
+          if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'AdminFeedBack') {
             iconName = focused ? 'file-text' : 'file-text-o';
@@ -55,7 +55,7 @@ const TabScreen = () => {
 const AdminNavigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TabScreen">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
           component={Login}

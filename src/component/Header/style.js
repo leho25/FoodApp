@@ -9,5 +9,5 @@ export const style = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
   },
-  textHeader: {fontSize: 26, fontWeight: '500', color: 'white'},
+  textHeader: {fontSize: 18, color: 'white'},
 });

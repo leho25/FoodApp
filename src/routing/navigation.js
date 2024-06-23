@@ -55,17 +55,17 @@ const TabScreen = () => {
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TabScreen">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
           component={Login}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen name="ChangePassword" component={ChangePassword} />
-        <Stack.Screen name="OrderHistory" component={OrderHistory} />
-        <Stack.Screen name="TabScreen" component={TabScreen} />
+        <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}}/>
+        <Stack.Screen name="ChangePassword" component={ChangePassword} options={{headerShown: false}}/>
+        <Stack.Screen name="OrderHistory" component={OrderHistory} options={{headerShown: false}}/>
+        <Stack.Screen name="TabScreen" component={TabScreen} options={{headerShown: false}}/>
         <Stack.Screen name="HomeDetail" component={HomeDetail} />
       </Stack.Navigator>
     </NavigationContainer>

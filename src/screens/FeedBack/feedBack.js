@@ -4,12 +4,14 @@ import style from './style';
 import {
     auth,
   } from '../../component/firebase/firebaseConfig';
+import HeaderUI from '../../component/Header';
 
 const FeedBack = () => {
   const [value, onChangeText] = useState('');
-  // const userId = auth.currentUser.email;
+  const userId = auth.currentUser.email;
   return (
     <View style={style.main}>
+      <HeaderUI title="Phản hồi"/>
       <Text style={style.text}>Họ và tên (*)</Text>
       <TextInput
         style={style.input}

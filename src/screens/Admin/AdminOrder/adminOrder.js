@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Text, FlatList, View} from 'react-native';
 import AdminOrderItem from './adminOrderItem';
 import style from './style';
+import HeaderUI from '../../../component/Header';
 
 const AdminOrder = (props) => {
   const[ok,setOK] = useState(true)
@@ -47,6 +48,7 @@ const AdminOrder = (props) => {
   ]);
   return (
     <View>
+      <HeaderUI title="Đơn hàng"/>
       <FlatList
         data={orders}
         renderItem={({item}) => <AdminOrderItem order={item} key={item.id} />}

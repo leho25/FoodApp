@@ -10,12 +10,13 @@ import {
   auth,
 } from '../../component/firebase/firebaseConfig';
 import {StackActions} from '@react-navigation/native';
-
+import HeaderUI from '../../component/Header';
 const Account = () => {
   const navigation = useNavigation();
   const userId = auth.currentUser.email;
   return (
     <View style={style.container}>
+      <HeaderUI title="Tài khoản"/>
       <View style={style.main}>
         <View style={style.viewUser}>
           <View style={style.viewIcon}>

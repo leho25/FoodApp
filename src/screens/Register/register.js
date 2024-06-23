@@ -15,6 +15,7 @@ import style from './style';
 import TextInputUI from '../../component/TextInputUI';
 import ButtonUI from '../../component/ButtonUI';
 import TitleUI from '../../component/TitleUI';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Register = () => {
   const navigation = useNavigation();
@@ -40,6 +41,13 @@ const Register = () => {
   });
   return (
     <View style={style.main}>
+       <View style={style.containerHeader}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={style.iconArrowBack}>
+          <Ionicons name={'arrow-back'} size={30} color={'black'} />
+        </TouchableOpacity>
+      </View>
       <TitleUI title="Đăng Ký" />
       <View style={style.viewInput}>
         <TextInputUI
@@ -103,7 +111,7 @@ const Register = () => {
             <Text style={style.textRegister}> Đăng nhập</Text>
           </TouchableOpacity>
         </View>
-      )}
+       )} 
     </View>
   );
 };

@@ -15,6 +15,16 @@ export default style = StyleSheet.create({
     
     elevation: 1,
   },
+  containerHeader: {
+    backgroundColor: '#fc5653',
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+  },
+  iconArrowBack: {position: 'absolute', left: 10},
+  textHeader: {fontSize: 18, color: 'white'},
   main: {
     flexDirection: 'row',
     borderBottomWidth: 1,

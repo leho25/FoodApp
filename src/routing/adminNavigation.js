@@ -11,7 +11,6 @@ import AdminFeedBack from '../screens/Admin/AdminFeedBack/adminFeedBack';
 import AdminAccount from '../screens/Admin/AdminAccount/adminAccount';
 import AdminOrder from '../screens/Admin/AdminOrder/adminOrder';
 import Revenue from '../screens/Admin/Revenue/revenue';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();

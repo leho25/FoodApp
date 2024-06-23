@@ -10,14 +10,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {style} from './style';
 const AddFood = ({navigation}) => {
   return (
-    <View style={{flex: 1}}>
+    <View style={style.containerMain}>
       <View style={style.containerHeader}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={{position: 'absolute', left: 10}}>
+          style={style.iconArrowBack}>
           <Ionicons name={'arrow-back'} size={30} color={'white'} />
         </TouchableOpacity>
-        <Text style={style.textHeader}>Chi tiết món ăn</Text>
+        <Text style={style.textHeader}>Thêm món ăn</Text>
       </View>
       <ScrollView>
         <View style={style.containerFormInputModal}>
@@ -26,7 +26,12 @@ const AddFood = ({navigation}) => {
         </View>
         <View style={style.containerFormInputModal}>
           <Text style={style.textLabelInputModal}>Mô tả món ăn</Text>
-          <TextInput style={style.inputModal} placeholder="Mô tả.." />
+          <TextInput
+            style={[style.inputModal, style.descriptionInput]}
+            placeholder="Mô tả.."
+            multiline
+            numberOfLines={4}
+          />
         </View>
         <View style={style.containerFormInputModal}>
           <Text style={style.textLabelInputModal}>Giá món ăn</Text>
@@ -42,7 +47,18 @@ const AddFood = ({navigation}) => {
         </View>
         <View style={style.containerFormInputModal}>
           <Text style={style.textLabelInputModal}>Link ảnh banner</Text>
-          <TextInput style={style.inputModal} placeholder="Link ảnh banner.." />
+          <Text style={style.colorWarning}>Phân cách với nhau bằng [ , ]</Text>
+          <TextInput
+            style={[style.inputModal, style.descriptionInput]}
+            placeholder="Link ảnh banner.."
+            multiline
+            numberOfLines={4}
+          />
+        </View>
+        <View style={style.containerButtonAddFood}>
+          <TouchableOpacity style={style.btnAddFood}>
+            <Text style={style.textBtnAddFood}>THÊM</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

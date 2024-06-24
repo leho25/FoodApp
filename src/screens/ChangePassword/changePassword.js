@@ -31,6 +31,7 @@ const ChangePassword = ({navigation}) => {
           }}
           value={password}
           title="Mật khẩu cũ"
+          autoFocus={true}
         />
         <TextInputUI
           onPress={text => {

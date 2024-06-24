@@ -59,6 +59,7 @@ const Register = () => {
           }}
           value={email}
           title="Email"
+          autoFocus={true}
         />
         <Text style={style.textVadition}>{errorEmail}</Text>
         <TextInputUI

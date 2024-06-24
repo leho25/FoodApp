@@ -25,7 +25,8 @@ export default style = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderColor:"red",
-    borderRadius:10
+    borderRadius:10,
+    fontSize:18
   },
   text:{
     color:"black",

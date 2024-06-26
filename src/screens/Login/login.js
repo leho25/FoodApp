@@ -54,9 +54,8 @@ const Login = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user && !user.emailVerified) {
-        const interval = setInterval(async () => {
-          await user.reload();
-          //console.log('reloaded!');
+        const interval = setInterval(() => {
+          user.reload();
           if (user.emailVerified) {
             firebaseSet(
               firebaseDatabaseRef(firebaseDatabase, `users/${user.uid}`),
@@ -66,7 +65,6 @@ const Login = () => {
                 accessToken: user.accessToken,
               },
             );
-            // console.log('verified!');
             clearInterval(interval);
           }
         }, 1000);

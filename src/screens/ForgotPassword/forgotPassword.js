@@ -30,6 +30,7 @@ const ForgotPassword = ({navigation}) => {
         }}
         value={email}
         title="Email"
+        autoFocus={true}
       />
       <Text style={style.textVadition}>{errorEmail}</Text>
       <ButtonUI

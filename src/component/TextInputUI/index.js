@@ -2,7 +2,7 @@ import React from "react";
 import { TextInput } from "react-native";
 import style from "./style";
 
-const TextInputUI = ({title,onPress,value,styleTextInput,secureTextEntry}) => {
+const TextInputUI = ({title,onPress,value,styleTextInput,secureTextEntry,autoFocus}) => {
     return(
         <TextInput 
             placeholder={title}
@@ -10,6 +10,7 @@ const TextInputUI = ({title,onPress,value,styleTextInput,secureTextEntry}) => {
             value={value}
             style={[style.textInput,styleTextInput]}
             secureTextEntry={secureTextEntry}
+            autoFocus={autoFocus}
         />
     )
 }

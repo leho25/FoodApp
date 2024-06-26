@@ -24,8 +24,8 @@ const Register = () => {
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
   //state for store email, password
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('phuocld2001@gmail.com');
+  const [password, setPassword] = useState('123456');
   const isValidationOK = () =>
     email.length > 0 &&
     password.length > 0 &&
@@ -41,7 +41,7 @@ const Register = () => {
   });
   return (
     <View style={style.main}>
-       <View style={style.containerHeader}>
+      <View style={style.containerHeader}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={style.iconArrowBack}>
@@ -59,6 +59,7 @@ const Register = () => {
           }}
           value={email}
           title="Email"
+          autoFocus={true}
         />
         <Text style={style.textVadition}>{errorEmail}</Text>
         <TextInputUI
@@ -111,7 +112,7 @@ const Register = () => {
             <Text style={style.textRegister}> Đăng nhập</Text>
           </TouchableOpacity>
         </View>
-       )} 
+      )}
     </View>
   );
 };

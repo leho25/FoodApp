@@ -84,4 +84,14 @@ export default style = StyleSheet.create({
   titleOrder: {
     marginRight: 10,
   },
+  containerHeader: {
+    backgroundColor: '#fc5653',
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+  },
+  textHeader: {fontSize: 18, color: 'white'},
+  iconArrowBack: {position: 'absolute', left: 10},
 });

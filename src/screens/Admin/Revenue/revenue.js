@@ -4,14 +4,14 @@ import {
   Text,
   FlatList,
   TextInput,
-  KeyboardAvoidingView,
-  Keyboard,
+TouchableOpacity
 } from 'react-native';
 import style from './style';
 import RevenueItem from './revenueItem';
 import DateTimePickerAndroid from '@react-native-community/datetimepicker';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Revenue = () => {
+const Revenue = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [todate, setToDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
@@ -66,6 +66,15 @@ const Revenue = () => {
   ]);
   return (
     <View style={style.main}>
+      <View style={style.containerHeader}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={style.iconArrowBack}>
+          <Ionicons name={'arrow-back'} size={30} color={'white'} />
+        </TouchableOpacity>
+        <Text style={style.textHeader}>Doanh thu</Text>
+      </View>
+
       <View style={style.viewDate}>
         <View style={style.viewSince}>
           <Text>Từ ngày:</Text>

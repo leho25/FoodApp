@@ -17,11 +17,12 @@ export default style = StyleSheet.create({
   },
   containerHeader: {
     backgroundColor: '#fc5653',
-    height: 50,
+    height:50,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
     justifyContent: 'center',
+    
   },
   iconArrowBack: {position: 'absolute', left: 10},
   textHeader: {fontSize: 18, color: 'white'},
@@ -49,21 +50,22 @@ export default style = StyleSheet.create({
     color: 'black',
   },
   viewTotal: {
-    margin:20
+    margin:20,
+    marginBottom:35,
   },
   viewPayMent:{
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   textTotal: {
     fontSize: 18,
     marginBottom: 10,
     color: 'red',
     fontWeight: 'bold',
-    marginRight:20
+    marginRight:20,
+    marginTop:15
   },
   textPayMent: {
     fontSize: 15,
-    marginBottom: 10,
     color: 'black',
     fontWeight:"bold",
     marginLeft:20

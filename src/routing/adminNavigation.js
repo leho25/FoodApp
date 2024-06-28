@@ -12,7 +12,7 @@ import AdminOrder from '../screens/Admin/AdminOrder/adminOrder';
 import Revenue from '../screens/Admin/Revenue/revenue';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AdminHome from '../screens/Admin/AdminHome/adminHome';
-
+import ChangePassword from '../screens/ChangePassword/changePassword';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const TabScreen = () => {
@@ -62,7 +62,16 @@ const AdminNavigation = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Revenue" component={Revenue} />
+        <Stack.Screen
+          name="Revenue"
+          component={Revenue}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="TabScreen"
           component={TabScreen}
@@ -79,4 +88,3 @@ const AdminNavigation = () => {
 };
 
 export default AdminNavigation;
-

@@ -3,17 +3,34 @@ import style from './style';
 import TextInputUI from '../../component/TextInputUI';
 import ButtonUI from '../../component/ButtonUI';
 import TitleUI from '../../component/TitleUI';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, Alert} from 'react-native';
 import {isValidEmail} from '../../utils/validation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {
+  auth,
+  sendPasswordResetEmail,
+  getAuth
+} from '../../component/firebase/firebaseConfig';
 
 const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
   const isValidationOK = () => email.length > 0 && isValidEmail(email) == true;
+  const user = auth.currentUser
+  console.log(user)
+  const handlePasswordResetRequest = async () => {
+    await sendPasswordResetEmail(auth,email)
+      .then(() => {
+        Alert.alert('Password reset email sent successfully');
+      })
+      .catch(error => {
+        Alert.alert('Lỗi', 'Vui lòng nhập đúng email của bạn');
+      });
+  };
+
   return (
     <View style={style.main}>
-       <View style={style.containerHeader}>
+      <View style={style.containerHeader}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={style.iconArrowBack}>
@@ -30,15 +47,15 @@ const ForgotPassword = ({navigation}) => {
         }}
         value={email}
         title="Email"
+        autoCapitalize="none"
         autoFocus={true}
       />
       <Text style={style.textVadition}>{errorEmail}</Text>
       <ButtonUI
         title="GỬI LẠI MẬT KHẨU"
         disabled={isValidationOK() == false}
-        onPress={() => {
-          alert('send password');
-        }}/>
+        onPress={handlePasswordResetRequest}
+      />
     </View>
   );
 };

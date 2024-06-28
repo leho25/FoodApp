@@ -8,6 +8,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,  
+  sendPasswordResetEmail,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword
+ 
   //read data from Firebase    
 } from "firebase/auth"
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
@@ -54,4 +59,8 @@ export {
     get,
     onValue, //reload when online DB changed
     signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    EmailAuthProvider,
+    reauthenticateWithCredential,
+    updatePassword
 }

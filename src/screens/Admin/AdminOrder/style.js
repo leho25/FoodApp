@@ -40,6 +40,7 @@ export default style = StyleSheet.create({
   },
   viewTotal: {
     margin: 20,
+    marginBottom:35
   },
   viewPayMent: {
     flexDirection: 'row',

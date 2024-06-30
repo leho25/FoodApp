@@ -3,8 +3,9 @@ import style from './style';
 import TextInputUI from '../../component/TextInputUI';
 import ButtonUI from '../../component/ButtonUI';
 import TitleUI from '../../component/TitleUI';
-import {View, TouchableOpacity, Alert} from 'react-native';
+import {View, TouchableOpacity, Alert, Text} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {isValidPassword} from '../../utils/validation';
 import {
   auth,
   EmailAuthProvider,
@@ -16,6 +17,8 @@ const ChangePassword = ({navigation}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [errorNewPassword, setErrorNewPassword] = useState('');
+  const [errorConfirmNewPassword, setErrorConfirmNewPassword] = useState('');
   const isValidationOK = () =>
     currentPassword.length > 0 &&
     newPassword.length > 0 &&
@@ -28,8 +31,6 @@ const ChangePassword = ({navigation}) => {
       return;
     }
     const user = auth.currentUser;
-    // console.log('auth()',auth())
-    console.log('auth', auth.EmailAuthProvider);
     // Re-authenticate user to verify current password
     const credential = EmailAuthProvider.credential(
       user.email,
@@ -50,13 +51,11 @@ const ChangePassword = ({navigation}) => {
           })
           .catch(error => {
             // Handle password update error
-            console.error('Error updating password:', error);
             Alert.alert('Failed to update password. Please try again later.');
           });
       })
       .catch(error => {
         // Handle re-authentication error
-        console.error('Error re-authenticating user:', error);
         Alert.alert(
           'Failed to re-authenticate. Please check your current password.',
         );
@@ -81,21 +80,34 @@ const ChangePassword = ({navigation}) => {
           value={currentPassword}
           title="Mật khẩu cũ"
           autoFocus={true}
+          styleTextInput={style.text}
         />
         <TextInputUI
           onPress={text => {
+            setErrorNewPassword(
+              isValidPassword(text) == true
+                ? ''
+                : 'Password must be at least 6 characters',
+            );
             setNewPassword(text);
           }}
           value={newPassword}
           title="Mật khẩu mới"
         />
+        <Text style={style.textVadition}>{errorNewPassword}</Text>
         <TextInputUI
           onPress={text => {
+            setErrorConfirmNewPassword(
+              isValidPassword(text) == true
+                ? ''
+                : 'Password must be at least 6 characters',
+            );
             setConfirmNewPassword(text);
           }}
           value={confirmNewPassword}
           title="Xác nhận mật khẩu mới"
         />
+        <Text style={style.textVadition}>{errorConfirmNewPassword}</Text>
         <View style={style.button}>
           <ButtonUI
             title="ĐỔI MẬT KHẨU"

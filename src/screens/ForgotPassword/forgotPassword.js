@@ -9,23 +9,21 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   auth,
   sendPasswordResetEmail,
-  getAuth
 } from '../../component/firebase/firebaseConfig';
 
 const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
   const isValidationOK = () => email.length > 0 && isValidEmail(email) == true;
-  const user = auth.currentUser
-  console.log(user)
+
   const handlePasswordResetRequest = async () => {
-    await sendPasswordResetEmail(auth,email)
+    await sendPasswordResetEmail(auth, email)
       .then(() => {
         Alert.alert('Password reset email sent successfully');
       })
       .catch(error => {
         Alert.alert('Lỗi', 'Vui lòng nhập đúng email của bạn');
-      });
+      });      
   };
 
   return (

@@ -6,15 +6,23 @@ export default style = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.background,
   },
+  textVadition: {
+    color: 'red',
+    fontSize: 15,
+    marginLeft: 20,
+  },
   viewInput: {
     flex: 0.9,
-    justifyContent:"center",
+    justifyContent: 'center',
   },
   containerHeader: {
     height: 50,
     paddingHorizontal: 10,
     justifyContent: 'center',
   },
+  text:{
+    marginBottom:20
+  },
   iconArrowBack: {position: 'absolute', left: 10},
-  button:{marginTop:15}
+  button: {marginTop: 15},
 });

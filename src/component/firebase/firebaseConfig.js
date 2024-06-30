@@ -11,7 +11,8 @@ import {
   sendPasswordResetEmail,
   EmailAuthProvider,
   reauthenticateWithCredential,
-  updatePassword
+  updatePassword,
+  fetchSignInMethodsForEmail
  
   //read data from Firebase    
 } from "firebase/auth"
@@ -62,5 +63,6 @@ export {
     sendPasswordResetEmail,
     EmailAuthProvider,
     reauthenticateWithCredential,
-    updatePassword
+    updatePassword,
+    fetchSignInMethodsForEmail
 }

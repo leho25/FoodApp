@@ -135,7 +135,9 @@ const Login = () => {
         />
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('ForgotPassword');
+            navigation.navigate('ForgotPassword', {
+              Email:email,
+            });
           }}>
           <Text style={style.forgotPassword}>Quên mật khẩu</Text>
         </TouchableOpacity>

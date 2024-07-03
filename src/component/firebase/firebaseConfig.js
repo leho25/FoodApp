@@ -1,15 +1,15 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { 
+import {initializeApp} from 'firebase/app';
+import {
   initializeAuth,
-  getReactNativePersistence ,
-  getAuth, 
+  getReactNativePersistence,
+  getAuth,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendEmailVerification,  
-  //read data from Firebase    
-} from "firebase/auth"
+  sendEmailVerification,
+  //read data from Firebase
+} from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 //ref = reference to a "collection"
 import {
@@ -19,9 +19,22 @@ import {
   child,
   get,
   onValue,
+  push,
 } from 'firebase/database';
-import {getFirestore} from 'firebase/firestore';
-
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  getStorage,
+} from 'firebase/storage';
+import {
+  getFirestore,
+  doc,
+  updateDoc,
+  collection,
+  addDoc,
+  getDocs,
+} from 'firebase/firestore';
 const firebaseConfig = {
   apiKey: 'AIzaSyCYZaZpUt-37w5RR5DZaByFjZnd8QP_To0',
   authDomain: 'foodapp-942df.firebaseapp.com',
@@ -33,25 +46,36 @@ const firebaseConfig = {
     'https://foodapp-942df-default-rtdb.asia-southeast1.firebasedatabase.app',
 };
 
-const app = initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 });
 //const auth = getAuth()
-const firebaseDatabase = getDatabase(app)
-const database = getFirestore();
+const firebaseDatabase = getDatabase(app);
+const storage = getStorage(app);
+const db = getFirestore(app);
 export {
-    auth,
-    getAuth,
-    firebaseDatabase,
-    database,
-    createUserWithEmailAndPassword,
-    onAuthStateChanged,
-    firebaseSet,
-    firebaseDatabaseRef,
-    sendEmailVerification,
-    child,
-    get,
-    onValue, //reload when online DB changed
-    signInWithEmailAndPassword,
-}
+  auth,
+  getAuth,
+  firebaseDatabase,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  firebaseSet,
+  firebaseDatabaseRef,
+  sendEmailVerification,
+  child,
+  get,
+  onValue, //reload when online DB changed
+  signInWithEmailAndPassword,
+  storage,
+  push,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  doc,
+  updateDoc,
+  collection,
+  addDoc,
+  db,
+  getDocs,
+};

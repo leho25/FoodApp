@@ -1,33 +1,39 @@
-import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import HeaderUI from '../../../component/Header';
 import SearchUI from '../../../component/SearchUI';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {style} from './style';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {
+  collection,
+  db,
+  getDocs,
+} from '../../../component/firebase/firebaseConfig';
 
 const AdminHome = ({navigation}) => {
-  return (
-    <View style={style.containerMain}>
-      <HeaderUI title={'Đồ ăn'} />
-      <SearchUI viewStyle={style.viewStyleSearch} />
+  const [products, setProducts] = useState([]);
+  const productList = ({item}) => {
+    return (
       <View style={style.containerListItem}>
         <View style={style.cardItemFood}>
           <View style={style.devLayoutItem}>
             <View style={style.containerImage}>
               <Image
                 source={{
-                  uri: 'https://www.mordeo.org/files/uploads/2016/10/Cute-Angry-Birds-Mobile-Wallpaper.jpg',
+                  uri: item?.image,
                 }}
                 style={style.imageItem}
               />
             </View>
             <View style={style.containerInforItem}>
-              <Text style={style.textInforItem}>Name</Text>
-              <Text style={style.textInforItem}>Discount</Text>
-              <Text style={style.textInforItem}>Price</Text>
-              <Text style={style.textInforItem}>Nổi bật</Text>
+              <Text style={style.textInforItem}>{item.name}</Text>
+              <Text style={style.textInforItem}>{item.discount}</Text>
+              <Text style={style.textInforItem}>{item.price}</Text>
+              <Text style={style.textInforItem}>
+                {item.toggleCheckBox ? 'Có' : 'Không'}
+              </Text>
             </View>
             <View style={style.containerIconItem}>
               <TouchableOpacity>
@@ -40,20 +46,35 @@ const AdminHome = ({navigation}) => {
           </View>
           <View style={style.containerDescription}>
             <Text numberOfLines={3} style={style.textDescription}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
+              {item.description}
             </Text>
           </View>
         </View>
       </View>
+    );
+  };
+  const getProducts = async () => {
+    const querySnapshot = await getDocs(collection(db, 'products/'));
+    const documents = [];
+    querySnapshot.forEach(doc => {
+      documents.push({id: doc.id, ...doc.data()});
+    });
+    setProducts(documents);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, [products]);
+  return (
+    <View style={style.containerMain}>
+      <HeaderUI title={'Đồ ăn'} />
+      <SearchUI viewStyle={style.viewStyleSearch} />
+      <FlatList
+        data={products}
+        keyExtractor={item => item.id}
+        renderItem={productList}
+        style={{flex: 1}}
+      />
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('AddFood');

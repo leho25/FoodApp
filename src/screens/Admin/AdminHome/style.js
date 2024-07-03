@@ -17,7 +17,7 @@ export const style = StyleSheet.create({
     shadowRadius: 10,
     elevation: 1,
     width: '100%',
-    height: '40%',
+    height: '100%',
     padding: 10,
     borderRadius: 1,
   },

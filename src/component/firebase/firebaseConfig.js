@@ -34,6 +34,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  deleteDoc,
 } from 'firebase/firestore';
 const firebaseConfig = {
   apiKey: 'AIzaSyCYZaZpUt-37w5RR5DZaByFjZnd8QP_To0',
@@ -78,4 +79,5 @@ export {
   addDoc,
   db,
   getDocs,
+  deleteDoc,
 };

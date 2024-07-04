@@ -19,16 +19,23 @@ import {
   addDoc,
   collection,
   db,
+  doc,
+  updateDoc,
 } from '../../../component/firebase/firebaseConfig';
+import {useRoute} from '@react-navigation/native';
 
 const AddFood = ({navigation}) => {
+  const {params} = useRoute();
+  const ID = params?.id;
   // const [imageBanner, setImageBanner] = useState([]);
-  const [image, setImage] = useState('');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(0);
-  const [discount, setDiscount] = useState(0);
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [image, setImage] = useState(ID ? params.image : '');
+  const [name, setName] = useState(ID ? params.name : '');
+  const [description, setDescription] = useState(ID ? params.description : '');
+  const [price, setPrice] = useState(ID ? params.price : '');
+  const [discount, setDiscount] = useState(ID ? params.discount : '');
+  const [toggleCheckBox, setToggleCheckBox] = useState(
+    ID ? params.toggleCheckBox : false,
+  );
   const [progress, setProgress] = useState(0);
   //lấy ảnh từ thư viện
   const pickImage = async () => {
@@ -59,6 +66,32 @@ const AddFood = ({navigation}) => {
       }
     } catch (e) {
       console.error('Error adding document: ', e);
+    }
+  };
+  const updateProduct = async (docId, data) => {
+    const docRef = doc(db, 'products/', docId);
+    console.log('docRef', docRef);
+    console.log('data', data);
+    try {
+      await updateDoc(docRef, data);
+      console.log('Document successfully updated!');
+    } catch (e) {
+      console.error('Error updating document: ', e);
+    }
+  };
+  const handleUpdate = async () => {
+    const data = {
+      name: name,
+      price: price,
+      description: description,
+      discount: discount,
+      toggleCheckBox: toggleCheckBox,
+      image: image,
+    };
+    const update = await updateProduct(ID, data);
+    if (update) {
+      await clearData();
+      navigation.goBack();
     }
   };
 
@@ -117,7 +150,11 @@ const AddFood = ({navigation}) => {
           style={style.iconArrowBack}>
           <Ionicons name={'arrow-back'} size={30} color={'white'} />
         </TouchableOpacity>
-        <Text style={style.textHeader}>Thêm món ăn</Text>
+        {ID ? (
+          <Text style={style.textHeader}>Sửa món ăn</Text>
+        ) : (
+          <Text style={style.textHeader}>Thêm món ăn</Text>
+        )}
       </View>
       <ScrollView>
         <View style={style.containerFormInputModal}>
@@ -220,9 +257,15 @@ const AddFood = ({navigation}) => {
           </TouchableOpacity>
         </View> */}
         <View style={style.containerButtonAddFood}>
-          <TouchableOpacity style={style.btnAddFood} onPress={addDocument}>
-            <Text style={style.textBtnAddFood}>THÊM</Text>
-          </TouchableOpacity>
+          {ID ? (
+            <TouchableOpacity style={style.btnAddFood} onPress={handleUpdate}>
+              <Text style={style.textBtnAddFood}>Update</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={style.btnAddFood} onPress={addDocument}>
+              <Text style={style.textBtnAddFood}>THÊM</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
     </View>

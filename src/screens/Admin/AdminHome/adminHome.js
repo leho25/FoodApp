@@ -9,12 +9,25 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   collection,
   db,
+  deleteDoc,
+  doc,
   getDocs,
 } from '../../../component/firebase/firebaseConfig';
 
 const AdminHome = ({navigation}) => {
   const [products, setProducts] = useState([]);
   const productList = ({item}) => {
+    const editProduct = () => {
+      navigation.navigate('AddFood', {
+        image: item.image,
+        name: item.name,
+        description: item.description,
+        discount: item.discount,
+        price: item.price,
+        toggleCheckBox: item.toggleCheckBox,
+        id: item.id,
+      });
+    };
     return (
       <View style={style.containerListItem}>
         <View style={style.cardItemFood}>
@@ -36,10 +49,10 @@ const AdminHome = ({navigation}) => {
               </Text>
             </View>
             <View style={style.containerIconItem}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => editProduct(item.id)}>
                 <MaterialCommunityIcons name={'playlist-edit'} size={36} />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleDelete(item.id)}>
                 <FontAwesome name={'remove'} size={36} />
               </TouchableOpacity>
             </View>
@@ -61,7 +74,19 @@ const AdminHome = ({navigation}) => {
     });
     setProducts(documents);
   };
-
+  const deleteProduct = async docId => {
+    const docRef = doc(db, 'products/', docId);
+    console.log('docRef', docRef);
+    try {
+      await deleteDoc(docRef);
+      console.log('Document successfully deleted!');
+    } catch (e) {
+      console.error('Error deleting document: ', e);
+    }
+  };
+  const handleDelete = async id => {
+    await deleteProduct(id);
+  };
   useEffect(() => {
     getProducts();
   }, [products]);
